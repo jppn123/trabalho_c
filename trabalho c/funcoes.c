@@ -69,7 +69,7 @@ char verificarMean(char *nome_arquivo){
   }
 }
 
-void calculaSCM(int *scm, struct pgm *pioA, struct pgm *pioB, int quant){
+void calculaSCM(int *scm, struct pgm *pioA, struct pgm *pioB, int quant, FILE *pf, char tipo){
   //setando os valores que serão utilizados e alocando as matrizes
   int linha = pioA->r, coluna = pioA->c;
   unsigned char *pdataA = pioA->pData, *pdataB = pioB->pData;
@@ -103,19 +103,18 @@ void calculaSCM(int *scm, struct pgm *pioA, struct pgm *pioB, int quant){
     }
   } 
   //fazendo a verificação, a soma de todos os valores de soma, deve ser a quantidade de elementos
+  /*
   int soma = 0;
   for(int i = 0; i< quant; i++){
     for(int x = 0; x < quant; x++){
       soma += *(scm + i * quant + x);
     }
   }
-  //if(soma == (linha*coluna)){
-    //printf("\nMatriz SCM computada corretamente!");
-  //}
- 
-}
-//insere os valores de scm no arquivo .txt e no final da linha insere a classe (0 ou 1)
-void outmatriz(int *scm, FILE *pf, int quant, char tipo){
+  if(soma == (linha*coluna)){
+    printf("\nMatriz SCM computada corretamente!");
+  }
+  */
+  //insere os valores de scm no arquivo .txt e no final da linha insere a classe (0 ou 1)
   for(int i=0;i<quant;i++){
     for(int x = 0; x < quant; x++){
       fprintf(pf, "%d, ", *(scm + i * quant + x));

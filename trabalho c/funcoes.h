@@ -21,5 +21,4 @@ struct pgm {
 
 void readPGMImage(struct pgm *, char *);
 char verificarMean(char *);
-void calculaSCM(int *, struct pgm *, struct pgm *, int);
-void outmatriz(int *,FILE *, int, char);
+void calculaSCM(int *, struct pgm *, struct pgm *, int, FILE *, char);
