@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
       cont += 1;
       
       //pula as primeiras detecções de dir (. e ..)
-      if (i >= 2) {
+      if (i >= 3) {
         //pega o primeiro char da palavra para conter o tipo do arquivo (0 ou 1)
         type = dir->d_name[0];
         
