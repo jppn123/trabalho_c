@@ -9,7 +9,7 @@
 <li>Abre o diretório que contém as imagens com a funções da biblioteca dirent.h.</li>
 <li>Seta o nome do arquivo de saída -> "SCM-Qtz " + quantização digitada pelo usuário e verifica se o arquivo foi aberto.</li>
 <li>Verifica se o diretório está aberto, se estiver entra em um for que termina o laço quando (dir = readdir(d)) != NULL, sendo o dir um ponteiro para uma estrutura dirent, ou seja, o laço acaba quando todos os arquivos do diretório forem percorridos.</li>
-<li>Esse laço pula de dois em dois, pois o programa foi feito da seguinte forma: ao ler o nome do arquivo, verifica-se o seu título, se tiver o "mean", que significa que é uma imagem modificada, não original, é pulado um laço (continue), se não tiver, entra-se em um outro laço.</li>
+<li>Esse laço pula de um em um, pois o programa foi feito da seguinte forma: ao ler o nome do arquivo, verifica-se o seu título, se tiver o "mean", que significa que é uma imagem modificada, não original, é pulado um laço (continue), se não tiver, entra-se em um outro laço.</li>
 <li>Nesse outro laço, é instaciada outra estrutura do mesmo tipo da "dir" citado acima. Porém, sua função é achar a imagem mean relacionada a imagem que está no ponteiro "dir". Após achar, essas imagens são setadas em strings e interligadas para uso no código.</li>
 <br>
 <p>-> Explicando a função SCM:</p>
