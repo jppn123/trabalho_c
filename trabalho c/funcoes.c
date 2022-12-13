@@ -30,7 +30,7 @@ void readPGMImage(struct pgm *pio, char *filename) {
     }
   }
   //a terceira linha é onde ficam as dimensões das imagens, então coletar os dados para pio->c e pio->r, coluna e linha
-  fseek(fp, -1, SEEK_CUR);
+  fseek(fp, -2, SEEK_CUR);
   fscanf(fp, "%d %d", &pio->c, &pio->r);
   if (ferror(fp)) {
     perror(NULL);
@@ -38,7 +38,7 @@ void readPGMImage(struct pgm *pio, char *filename) {
   }
   //a quarta linha é onde fica o maximo valor da variação de pdata
   fscanf(fp, "%d", &pio->mv);
-  fseek(fp, 1, SEEK_CUR);
+  fseek(fp, 0, SEEK_CUR);
   //aloca espaço e coleta todos os dados da quinta linha pra pdata, esses serão os valores tratados posteriormente
   pio->pData = (unsigned char *)malloc(pio->r * pio->c * sizeof(unsigned char));
   switch (pio->tipo) {
@@ -78,12 +78,12 @@ void calculaSCM(int *scm, struct pgm *pioA, struct pgm *pioB, int quant, FILE *p
   
   matrizA = malloc(sizeof(int)*linha*coluna);
   matrizB = malloc(sizeof(int)*linha*coluna);
-  
+  int divisao = 256/quant;
   //preenche as matrizes com os valores de pdata % quantização, para tratar cada dado de pdata conforme a quantização indicada
   for(int i = 0; i < linha; i++){
     for(int x = 0; x < coluna; x++){
-      *(matrizA + i * coluna + x) = *(pdataA + i * coluna + x) % quant;
-      *(matrizB + i * coluna + x) = *(pdataB + i * coluna + x) % quant;
+      *(matrizA + i * coluna + x) = (int) (*(pdataA + i * coluna + x) / divisao);
+      *(matrizB + i * coluna + x) = (int) (*(pdataB + i * coluna + x) / divisao);
     }
   }
   //seta todas as posições de scm para 0
@@ -109,9 +109,9 @@ void calculaSCM(int *scm, struct pgm *pioA, struct pgm *pioB, int quant, FILE *p
       soma += *(scm + i * quant + x);
     }
   }
-  if(soma == (linha*coluna)){
-    printf("\nMatriz SCM computada corretamente!");
-  }
+  //if(soma == (linha*coluna)){
+    //printf("\nMatriz SCM computada corretamente!");
+  //}
  
   //insere os valores de scm no arquivo .txt e no final da linha insere a classe (0 ou 1)
   for(int i=0;i<quant;i++){

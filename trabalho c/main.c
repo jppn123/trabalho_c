@@ -41,12 +41,12 @@ int main(int argc, char *argv[]) {
 
   if (d) {
     //abrindo dir enquanto houver arquivos
-    for (int i = 0; (dir = readdir(d)) != NULL; i += 2) {
+    for (int i = 0; (dir = readdir(d)) != NULL; i ++) {
       begin = clock(); 
       cont += 1;
       
       //pula as primeiras detecções de dir (. e ..)
-      if (i >= 3) {
+      if (i >= 2) {
         //pega o primeiro char da palavra para conter o tipo do arquivo (0 ou 1)
         type = dir->d_name[0];
         
@@ -68,11 +68,11 @@ int main(int argc, char *argv[]) {
         } else {
           continue;
         }
-        puts("\n-------------------------------------------");
+       // puts("\n-------------------------------------------");
         //lê as duas imagens utilizando os nomes adquiridos anteriormente, imagem e imagem_mean
         readPGMImage(&img, nome_arquivo);
         readPGMImage(&img_mean, nome_arquivo_mean);
-        printf("Lendo imagens PGM (dados em binário)");
+        //printf("Lendo imagens PGM (dados em binário)");
         //realiza o calculo de scm e insere cada scm dentro do arquivo .txt aberto anteriormente
         scm = malloc(quantizacao * quantizacao * sizeof(int));
         calculaSCM(scm,&img, &img_mean, quantizacao, txt, type);
@@ -84,7 +84,7 @@ int main(int argc, char *argv[]) {
       time_total += time_per_img;
 
     }
-    puts("\n-------------------------------------------");
+    //puts("\n-------------------------------------------");
     closedir(d);
     fclose(txt);
   }
