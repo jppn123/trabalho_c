@@ -75,7 +75,8 @@ int main(int argc, char *argv[]) {
         //printf("Lendo imagens PGM (dados em binário)");
         //realiza o calculo de scm e insere cada scm dentro do arquivo .txt aberto anteriormente
         scm = malloc(quantizacao * quantizacao * sizeof(int));
-        calculaSCM(scm,&img, &img_mean, quantizacao, txt, type);
+        calculaSCM(scm,&img, &img_mean, quantizacao);
+        outmatriz(scm,txt, quantizacao, type);
         
       }
       
